@@ -1,0 +1,60 @@
+{
+  "model_name": "OLMoE",
+  "model_path": "outfile/OLMoE/model_saved/ASVD_Seed=3.pt",
+  "dataset": "wikitext2",
+  "seed": 3,
+  "DEV": "cpu",
+  "step": 0,
+  "updating_nsamples": 16,
+
+  "eval": {
+    "enabled": true,
+    "batch_size": 512,
+    "nsamples": 500,
+    "wiki_batch_size": 16,
+    "wiki_nsamples": 0,
+    "gen_seq_len": 1024,
+    "model_seq_len": 2048
+  },
+  "svd": {
+    "enabled": true,
+    "method": "ASVD",
+    "expert_ranking": false,
+    "attn_rank": 2048,
+    "compress_ratio": 0.1,
+    "whitening_nsamples": 32,
+    "load_from_file": false,
+    "save_model": false
+  },
+  "pruning": {
+    "enabled": true,
+    "eval_nsamples": 32,
+    "importance_metrics": "activation_frequency",
+    "load_from_file": true,
+    "strategy": "fixed",
+    "compress_ratio": 0.1,
+    "pruning_nsamples": 256,
+    "save_metrics": false,
+    "save_model": false
+  },
+  "merging": {
+    "enabled": false,
+    "eval_nsamples": 256,
+    "eval_object": "weight",
+    "metrics": "cosine",
+    "weighting_factor": "activation_frequency",
+    "load_from_file": true,
+    "save_model": false,
+    "save_metrics": false,
+    "num_expert_group": 59,
+    "compress_ratio": 0.1
+  },
+  "other": {
+    "build_basenet": false,
+    "num_dominate_expert": 8,
+    "fine_tune_path": null
+  }
+}
+
+
+

@@ -9,6 +9,13 @@
 * **Authors:** Shuangyou Feng, Chenyu Xu, Yi Ding, Zhi Liang, Sihai Zhang
 * **Code:** [https://github.com/sonder0127/compression-MoE](https://github.com/sonder0127/compression-MoE)
 
+<!-- ===== Figures at the beginning ===== -->
+![Figure 1 — Overview of compression strategies and sequential compositions](assets/Methodlogy.png)
+*Figure 1. Overview of our MoE compression setting and sequential combinations (D/P/M) with contribution allocations.*
+
+![Figure 8 — Best strategy by compression level and method mix](assets/Conclusion_heatmap.png)
+*Figure 8. Best-performing strategy across compression levels. Balanced contributions tend to win under higher compression.*
+
 ## 🔍 TL;DR
 
 * 我们系统化评测了 MoE 压缩的单法、两两组合与三法顺序组合，并在不同**压缩率**与**方法贡献分配**下给出对比与原则。结论高度概括为：**Parsimony（节制）、Order（顺序）、Balance（均衡）**。

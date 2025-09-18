@@ -23,18 +23,6 @@
 * 低压缩率下单法已足够；高压缩率下合理的组合更有效；**均衡的贡献分配**通常带来更优结果。
 * 速度与显存：更高压缩降低峰值显存；提高**分解贡献**能稳定提升推理速度；当剩余专家数仍 ≥ top-k 时，纯剪枝或合并对速度提升有限。
 
-> 以上摘要基于论文中的方法与实验小结整理（详见论文正文与图示）。
-
----
-
-## 🧩 Methods
-
-* **Low-rank Decomposition (D)**：对专家权重进行 SVD 截断得到低秩近似。
-* **Expert Pruning (P)**：据多种专家重要性度量（激活频率、路由权重累计、输出 L2 范数等）剪除低贡献专家。
-* **Expert Merging (M)**：先分组再融合，支持**主导专家聚类**与**全局相似聚类**；对应距离度量可选 **L2 / Cos**，融合规则 **LERP / SLERP**。
-* **Sequential Compositions**：如 `D+P`、`M+D`、`P+M`，以及三法如 `P+M_L2+D`。
-* **Contribution Allocation**：在固定总压缩率下，为各方法分配其贡献占比，形成二维/三维搜索面。
-
 ---
 
 ## 🗂️ Project Structure
@@ -76,9 +64,8 @@ compression-MoE/
 conda create -n moe-compress python=3.10 -y
 conda activate moe-compress
 
-
 # 2) 本仓库作为包
-pip install -e .
+pip install -r requirements.txt
 ```
 
 ---
@@ -155,49 +142,14 @@ python pruning_merging_svd.py
 
 ---
 
-## 📈 Reproducing Key Figures
-
-> 把论文里对应图片导出为 PNG，放到 `assets/` 后用下方 Markdown 引用即可。
-
-* **Pairwise vs. Single**
-  ![Pairwise vs Single](assets/fig2_pairwise.png)
-  *每列展示归一化的 perplexity 与 accuracy；阴影表示贡献区间极值，虚线为最优点。*
-
-* **Best of Single/Pairwise/Triple**
-  ![Single vs Pairwise vs Triple](assets/fig3_best_curves.png)
-
-* **Order Sensitivity Heatmaps**
-  ![Order Heatmaps](assets/fig4_order_heatmaps.png)
-
-* **Decomposition ↔ Pruning 交互分析**
-  ![Set Overlap after Decomposition vs Pruning](assets/fig5_overlap.png)
-
-* **Speed & Peak Memory**
-  ![Speed & Memory](assets/fig7_speed_memory.png)
-
-* **Best Strategy by Compression Level**
-  ![Best strategy grid](assets/fig8_best_grid.png)
-
----
-
 ## 🧪 Datasets & Tasks
 
 * 语言建模：**WikiText-2**, **PTB**
 * QA：**OpenBookQA**, **ARC-Easy**, **ARC-Challenge**, **MathQA**
-* 评测指标：**Perplexity / Accuracy**；同时统计**吞吐 tokens/s**与**峰值显存**。
+* 评测指标：**Perplexity / Accuracy**；**吞吐 tokens/s**与**峰值显存**。
 * 环境：示例在 **NVIDIA A100** 上完成，你也可以在其他 GPU 上复现（批大小与精度可能需调整）。
 
 ---
-
-## 🧠 Practical Guidelines
-
-* **Parsimony**：压缩率低时，单一方法常足够；压缩率升高再考虑组合。
-* **Order**：`M→D` 往往优于 `D→M`；`D↔P` 顺序影响较小但推荐先 D 后 P；`M→P` 往往更差。
-* **Balance**：在可压缩预算内，**均衡**的 D 与 P 往往更优；过度合并会损伤后续分解效果；只合并或只剪枝在激活专家数仍 ≥ top-k 时，对速度提升有限。
-
----
-
-
 
 ## 📜 Citation
 

@@ -122,5 +122,3 @@ If you find this repository useful, please consider citing our work:
 ## Acknowledgements
 
 This project builds on **OLMoE** for the base MoE architecture and routing setup. The evaluation datasets are drawn from publicly available benchmarks.
-
-```

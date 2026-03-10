@@ -8,11 +8,15 @@ Open-source implementation for compressing Mixture-of-Experts (MoE) models with 
 
 ## Overview
 
-![Figure 1: Overview of compression strategies and sequential compositions](assets/Methodlogy.png)
-*Figure 1. Overview of our MoE compression framework, including single methods, sequential combinations of D/P/M, and contribution-ratio allocation.*
+<p align="center">
+  <img src="assets/Methodlogy.png" alt="Figure 1: Overview of compression strategies and sequential compositions" width="700"/>
+</p>
+<p align="center"><em>Figure 1. Overview of our MoE compression framework, including single methods, sequential combinations of D/P/M, and contribution-ratio allocation.</em></p>
 
-![Figure 8: Best strategy by compression level and method mix](assets/Conclusion_heatmap.png)
-*Figure 8. Best-performing strategies across compression levels. At higher compression ratios, more balanced contribution allocations often perform better.*
+<p align="center">
+  <img src="assets/Conclusion_heatmap.png" alt="Figure 8: Best strategy by compression level and method mix" width="700"/>
+</p>
+<p align="center"><em>Figure 8. Best-performing strategies across compression levels. At higher compression ratios, more balanced contribution allocations often perform better.</em></p>
 
 ## TL;DR
 

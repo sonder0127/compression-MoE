@@ -1,4 +1,4 @@
-# PARSIMONY, ORDER, AND BALANCE: Compression Principles for MoE Models
+# Parsimony, Order and Balance: Principles for Compressing Mixture-of-Experts Models
 
 Open-source implementation for compressing Mixture-of-Experts (MoE) models with **low-rank decomposition (D)**, **expert pruning (P)**, and **expert merging (M)**. The repository supports **single-method compression**, **sequential combinations**, and **contribution-ratio allocation** across methods.
 

@@ -1,0 +1,40 @@
+{
+  "model_name": "OLMoE",
+  "model_path": "outfile/OLMoE/model_saved/ASVD_Seed=3.pt",
+  "dataset": "wikitext2",
+  "seed": 3,
+  "DEV": "cpu",
+  "order": "PMD",
+  "save_model": true,
+  "eval": {
+    "enabled": false,
+    "batch_size": 64,
+    "nsamples": 0,
+    "gen_seq_len": 1024,
+    "model_seq_len": 2048
+  },
+  "svd": {
+    "enabled": true,
+    "method": "ASVD",
+    "whitening_nsamples": 4,
+    "load_from_file": false
+  },
+  "pruning": {
+    "enabled": true,
+    "eval_nsamples": 4,
+    "importance_metrics": "activation_frequency",
+    "load_from_file": false,
+    "strategy": "fixed"
+  },
+  "merging": {
+    "enabled": true,
+    "eval_nsamples": 4,
+    "eval_object": "router_logits",
+    "metrics": "l2",
+    "weighting_factor": "activation_frequency",
+    "load_from_file": false
+  }
+}
+
+  
+  

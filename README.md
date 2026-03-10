@@ -124,5 +124,3 @@ If you find this repository useful, please consider citing our work:
 This project builds on **OLMoE** for the base MoE architecture and routing setup. The evaluation datasets are drawn from publicly available benchmarks.
 
 ```
-4. 更适合开源仓库展示的 badge 和目录导航。
-```

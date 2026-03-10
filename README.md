@@ -82,24 +82,23 @@ python run.py
 
 ## Supported Datasets and Tasks
 
-### Language Modeling
+| Task Type | Dataset |
+|-----------|---------|
+| Language Modeling | WikiText-2 |
+| Language Modeling | PTB |
+| Question Answering | OpenBookQA |
+| Question Answering | ARC-Easy |
+| Question Answering | ARC-Challenge |
+| Question Answering | MathQA |
 
-* WikiText-2
-* PTB
+## Evaluation Metrics
 
-### Question Answering
-
-* OpenBookQA
-* ARC-Easy
-* ARC-Challenge
-* MathQA
-
-### Evaluation Metrics
-
-* **Perplexity**
-* **Accuracy**
-* **Throughput (tokens/s)**
-* **Peak memory usage**
+| Metric | Description |
+|--------|-------------|
+| Perplexity | Language modeling performance |
+| Accuracy | Downstream task performance |
+| Throughput (tokens/s) | Inference speed |
+| Peak memory usage | Memory efficiency during inference |
 
 ## Hardware Environment
 

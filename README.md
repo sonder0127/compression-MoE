@@ -61,11 +61,14 @@ compression-MoE/
 
 ```bash
 # 1) Create env
-conda create -n moe-compress python=3.10 -y
-conda activate moe-compress
+conda env create -f openmax_base.yml
+conda activate openmax
 
 # 2) Install dependencies
-pip install -r requirements.txt
+cd lm-evaluation-harness
+pip install -e .
+cd ..
+python -m pip install -r requirements.txt
 ````
 
 ---
@@ -74,7 +77,7 @@ pip install -r requirements.txt
 
 Modify the configuration according to your compression requirements.
 
-Example: `configs/pruning_merging_svd.json`
+Example: `configs/PMD.json`
 
 ```json
 {
@@ -137,7 +140,7 @@ Example: `configs/pruning_merging_svd.json`
 Then run:
 
 ```bash
-python pruning_merging_svd.py
+python run.py
 ```
 
 ---

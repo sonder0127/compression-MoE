@@ -1,0 +1,28 @@
+name: openmax
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+
+  # --- PyTorch GPU stack (stable on Ubuntu 22.04 + 3090/4090) ---
+  - pytorch=2.3.1
+  - torchvision=0.18.1
+  - torchaudio=2.3.1
+  - pytorch-cuda=12.1
+
+  # --- Common compiled deps moved to conda for portability ---
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - pyarrow
+  - pillow
+  - psutil
+  - pyyaml
+  - regex
+  - tqdm
+  - packaging

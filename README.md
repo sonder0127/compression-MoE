@@ -38,20 +38,16 @@ compression-MoE/
 │  ├─ modeling\_pruning.py            # Expert pruning utilities (scoring & mask application)
 │  └─ modeling\_svdmlp.py             # SVD-based factorization for expert MLP weights
 ├─ configs/
-│  ├─ pruning\_merging\_svd.json       # Hyperparameter presets for pruning/merging/SVD sweeps
-│  └─ ...                            # Additional experiment configs
-├─ method/
-│  ├─ acc\_evaluator.py               # Accuracy evaluator for QA benchmarks
-│  ├─ calcute.py                     # Contribution-ratio calculator (allocation utilities)
-│  ├─ compress\_method.py             # Compression method registry & orchestration
-│  ├─ expert\_pruning.py              # Implementations of expert-pruning strategies/metrics
-│  └─ ppl\_evaluator.py               # Perplexity evaluator for language-modeling tasks
+│  └─ PMD.json       # Hyperparameter presets for pruning/merging/SVD sweeps
 ├─ utils/
 │  ├─ data\_utils.py                  # Dataset loading
 │  └─ model\_utils.py                 # Model loading
-├─ assets/                           # Figures and static assets for README/docs
+├─ acc\_evaluator.py               # Accuracy evaluator for QA benchmarks
+├─ calcute.py                     # Contribution-ratio calculator (allocation utilities)
+├─ compress\_method.py             # Compression method registry & orchestration
+├─ ppl\_evaluator.py               # Perplexity evaluator for language-modeling tasks
 ├─ README.md
-└─ pruning\_merging\_svd.py            # Main CLI entry for joint pruning/merging/SVD pipeline
+└─ run.py            # Main CLI entry for joint pruning/merging/SVD pipeline
 
 ````
 
@@ -64,10 +60,13 @@ compression-MoE/
 conda env create -f openmax_base.yml
 conda activate openmax
 
-# 2) Install dependencies
+# 2) Install lm-harnes
+git clone --depth 1 https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
 pip install -e .
 cd ..
+
+# 3) Install dependencies
 python -m pip install -r requirements.txt
 ````
 
@@ -75,68 +74,7 @@ python -m pip install -r requirements.txt
 
 ## 🚀 Quick Start
 
-Modify the configuration according to your compression requirements.
-
-Example: `configs/PMD.json`
-
-```json
-{
-  "model_name": "OLMoE",
-  "model_path": "outfile/OLMoE/model_saved/ASVD_Seed=3.pt",
-  "dataset": "wikitext2",
-  "seed": 3,
-  "DEV": "cpu",
-  "step": 0,
-  "updating_nsamples": 16,
-
-  "eval": {
-    "enabled": true,
-    "batch_size": 512,
-    "nsamples": 500,
-    "wiki_batch_size": 16,
-    "wiki_nsamples": 0,
-    "gen_seq_len": 1024,
-    "model_seq_len": 2048
-  },
-  "svd": {
-    "enabled": true,
-    "method": "ASVD",
-    "mlp_rank": 300,
-    "attn_rank": 2048,
-    "compress_ratio": 0.1,
-    "whitening_nsamples": 32,
-    "load_from_file": false,
-    "save_model": false
-  },
-  "pruning": {
-    "enabled": true,
-    "eval_nsamples": 256,
-    "importance_metrics": "activation_frequency",
-    "load_from_file": true,
-    "strategy": "fixed",
-    "compress_ratio": 0.1,
-    "pruning_nsamples": 256,
-    "save_model": false
-  },
-  "merging": {
-    "enabled": true,
-    "eval_nsamples": 32,
-    "eval_object": "weight",
-    "metrics": "l2",
-    "weighting_factor": "activation_frequency",
-    "load_from_file": true,
-    "save_model": false,
-    "num_expert_group": 59,
-    "compress_ratio": 0.1
-  },
-  "other": {
-    "build_basenet": false,
-    "num_dominate_expert": 8,
-    "fine_tune_path": null
-  }
-}
-```
-
+Modify the configuration according to your compression requirements: `configs/PMD.json`
 Then run:
 
 ```bash
